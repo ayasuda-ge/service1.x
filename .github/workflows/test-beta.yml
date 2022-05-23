@@ -1,0 +1,49 @@
+name: Test Service 1.1 (Docker)
+on:
+  schedule:
+    #NY 23:00pm
+    - cron: '*/60 * * * *'
+    #- cron: '0 3 * * *'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    environment: dev
+    env:
+      #for build only
+      EC_GITHUB_TOKEN: ${{secrets.MY_GITHUB_TKN}}      
+      EC_BUILD_ID: ${{ github.run_number }}
+      COGNITO_URL: ${{secrets.COGNITO_URL}}
+      COGNITO_CID: ${{secrets.COGNITO_CID}}
+      COGNITO_CSC: ${{secrets.COGNITO_CSC}}    
+      PRNT_KEY: ${{secrets.PRNT_KEY}}
+      EC_PRVT_PWD: ${{secrets.EC_PRVT_PWD}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Launch Service 1.1 (Beta)
+        run: chmod +x ./test/e2e.sh && ./test/e2e.sh            
+      - name: notify svc stakeholders
+        uses: dawidd6/action-send-mail@v2
+        if: success()
+        with:
+          server_address: ${{ secrets.ADM_EML_SVR }}
+          server_port: 587
+          username: ${{ secrets.ADM_EML_USR }}
+          password: ${{ secrets.ADM_EML_PWD }}
+          subject: EC-Release > Service 1.x > e2e > Result
+          # Literal body:
+          body: |
+            ### EC Service v1.1 End-2-End Usage Simulation Test
+            Greeting, you have been identified as the EC Service v1.1 adoption group to receive this notification.
+            
+            The service (v1.1) has passed the [functional/stress test](https://github.com/ayasuda-ge/service1.x/actions/runs/${{ github.run_id }}) with [this script](https://github.com/ayasuda-ge/service1.x/blob/1.1/test/e2e.sh#L13) in a runtime environment. The test data is captured in a db and is also available to you for further analysis/ci purpose. Please reach out to the product team for more information.
+            
+            
+            Thank you,
+            
+            R & D @Enterprise-Connect
+          to: ${{ secrets.EC_USRGRP }}
+          from: EC Autobot <DoNotReply@ec.autobot>
+          content_type: text/html
+          convert_markdown: true
