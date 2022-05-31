@@ -31,9 +31,13 @@ function int_a() {
   wget -q -O ./svc.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc.yaml 
   wget -q -O ./igs.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/igs.yaml
   
-  op=$(echo "$2" | jq -r '.CT_GHB_TKN')
-  curl -Ss -o ./list.txt "https://${op}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
-  git clone "https://${op}@github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git"
+  #sid=$(echo "$1" | jq -r '.SVC_ID')  
+  #sed -i "" "s|{{SVC_ID}}|$sid|g" dpl.yaml
+  
+  
+  gbt=$(echo "$2" | jq -r '.CT_GHB_TKN')
+  curl -Ss -o ./list.txt "https://${gbt}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
+  git clone "https://${gbt}@github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git"
   
   tree ./ && cd - && rm -Rf tmp
   exit 0
