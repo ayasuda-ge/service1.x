@@ -29,10 +29,10 @@ function int_a() {
   mkdir -p tmp && cd tmp
   wget -O ./dpl.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/dpl.yaml 
   wget -O ./svc.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc.yaml 
-  wget -O ./igs.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/igs.yaml 
+  wget -O ./igs.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/igs.yaml
   
   op=$(echo "$2" | jq -r '.CT_GHB_TKN')
-  git clone "https://${op}@github.build.ge.com/Enterprise-Connect/disty.git"
+  curl "https://${op}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
   tree ./ && cd - && rm -Rf tmp
   exit 0
 }
