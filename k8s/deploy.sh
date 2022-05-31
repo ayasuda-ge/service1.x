@@ -27,8 +27,12 @@ function int_a() {
   #printf "{\"req\":%s,\"env\":%s,\"hello\":\"world\"}" "$1" "$2"
   #echo "$2" | jq -r '.CT_GHB_TKN'
   mkdir -p tmp && cd tmp
+  wget -O ./dpl.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/dpl.yaml 
+  wget -O ./svc.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc.yaml 
+  wget -O ./igs.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/igs.yaml 
+  
   op=$(echo "$2" | jq -r '.CT_GHB_TKN')
   git clone "https://${op}@github.build.ge.com/Enterprise-Connect/disty.git"
-  cd - && rm -Rf tmp
+  tree ./ && cd - && rm -Rf tmp
   exit 0
 }
