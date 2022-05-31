@@ -26,6 +26,6 @@ function int_a() {
   
   printf "{\"req\":%s,\"env\":%s,\"hello\":\"world\"}" "$1" "$2"
   op=$(echo "$1" | jq -r '.CT_GHB_TKN')
-  git clone "https://${op}github.build.ge.com/Enterprise-Connect/disty.git"
+  git clone "https://${op}@github.build.ge.com/Enterprise-Connect/disty.git"
   exit 0
 }
