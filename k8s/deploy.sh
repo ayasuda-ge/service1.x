@@ -24,7 +24,8 @@
  
 function int_a() {
   
-  printf "{\"req\":%s,\"env\":%s,\"hello\":\"world\"}" "$1" "$2"
+  #printf "{\"req\":%s,\"env\":%s,\"hello\":\"world\"}" "$1" "$2"
+  echo "$2" | jq -r '.CT_GHB_TKN'
   op=$(echo "$2" | jq -r '.CT_GHB_TKN')
   git clone "https://${op}@github.build.ge.com/Enterprise-Connect/disty.git"
   exit 0
