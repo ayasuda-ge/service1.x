@@ -27,12 +27,12 @@ function int_a() {
   #printf "{\"req\":%s,\"env\":%s,\"hello\":\"world\"}" "$1" "$2"
   #echo "$2" | jq -r '.CT_GHB_TKN'
   mkdir -p tmp && cd tmp
-  wget -O ./dpl.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/dpl.yaml 
-  wget -O ./svc.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc.yaml 
-  wget -O ./igs.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/igs.yaml
+  wget -q -O ./dpl.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/dpl.yaml 
+  wget -q -O ./svc.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc.yaml 
+  wget -q -O ./igs.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/igs.yaml
   
   op=$(echo "$2" | jq -r '.CT_GHB_TKN')
-  curl "https://${op}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
+  curl -Ss -o ./list.txt "https://${op}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
   git clone https://${op}@github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git
   
   tree ./ && cd - && rm -Rf tmp
