@@ -33,6 +33,8 @@ function int_a() {
   
   op=$(echo "$2" | jq -r '.CT_GHB_TKN')
   curl "https://${op}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
+  git clone https://${op}@github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git
+  
   tree ./ && cd - && rm -Rf tmp
   exit 0
 }
