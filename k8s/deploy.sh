@@ -47,7 +47,7 @@ function int_a() {
         case $ref1 in
          ZONE)
          
-          echo " [+] svc id: ${ref1}"
+          echo " [+] svc id: ${ref2}"
           ;;
          *)
           echo " [-] unhandled val ${ref1}: ${ref2}"
