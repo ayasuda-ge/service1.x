@@ -23,6 +23,6 @@
 # ex: int_a "$EXEC_DAT" "$EXEC_MAP"
  
 function int_a() {
-  printf "{\"req\":%s,\"env\":%s,\"hello\",\"world\"}" "$1" "$2"
+  printf "{\"req\":%s,\"env\":%s,\"hello\":\"world\"}" "$1" "$2"
   exit 0
 }
