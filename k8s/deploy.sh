@@ -34,10 +34,28 @@ function int_a() {
   #sid=$(echo "$1" | jq -r '.SVC_ID')  
   #sed -i "" "s|{{SVC_ID}}|$sid|g" dpl.yaml
   
-  
   gbt=$(echo "$2" | jq -r '.CT_GHB_TKN')
-  curl -Ss -o ./list.txt "https://${gbt}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
+  curl -Ss -o ~list "https://${gbt}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
   git clone "https://${gbt}@github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git"
+  
+  while read -r line; do
+    
+    if [[ ! -z "$line" ]]; then
+      if [[ "$line" != *"service instance"* ]]; then
+        ref1=$(echo $line | cut -d '=' -f 1)
+        ref2=$(echo $line | cut -d '=' -f 2)
+        case $ref1 in
+         ZONE)
+         
+          echo " [+] svc id: ${ref1}"
+          ;;
+         *)
+          echo " [-] unhandled val ${ref1}: ${ref2}"
+          ;;
+        esac
+      fi      
+    fi
+  done < ~list
   
   tree ./ && cd - && rm -Rf tmp
   exit 0
