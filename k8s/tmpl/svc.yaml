@@ -1,0 +1,27 @@
+---
+# begin ec autobot
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-{{SVC_ID}}
+  labels:
+    run: svc-{{SVC_ID}}
+spec:
+  #clusterIP: None
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 7990
+    protocol: TCP
+    name: http
+  - port: 7991
+    targetPort: 7991
+    protocol: TCP
+    name: sac-mst-port
+  - port: 7992
+    targetPort: 7992
+    protocol: TCP
+    name: sac-slv-port
+  selector:
+    run: dpl-{{SVC_ID}}
+# end of ec autobot
