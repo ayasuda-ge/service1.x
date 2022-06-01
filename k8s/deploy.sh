@@ -108,6 +108,7 @@ function int_a() {
   git config user.name "ec.bot"
   git config user.email "ec.bot@ge.local"
   git commit -m 'update svc'
+  git push origin master -f
   cd - && tree ./ && rm -Rf tmp
   exit 0
 }
