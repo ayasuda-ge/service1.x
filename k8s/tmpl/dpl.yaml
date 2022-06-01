@@ -27,10 +27,10 @@ spec:
         image: ghcr.io/ec-release/sac:master-eks
         resources:
           requests:
-            memory: "1024Mi"
+            memory: "128Mi"
             cpu: "500m"
           limits:
-            memory: "1024Mi"
+            memory: "256Mi"
             cpu: "500m"
         livenessProbe:
           tcpSocket:
@@ -78,10 +78,10 @@ spec:
         image: ghcr.io/ec-release/sac:slave-eks
         resources:
           requests:
-            memory: "1024Mi"
+            memory: "128Mi"
             cpu: "500m"
           limits:	
-            memory: "1024Mi"
+            memory: "256Mi"
             cpu: "500m"
         livenessProbe:
           tcpSocket:
