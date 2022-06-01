@@ -47,12 +47,15 @@ function int_a() {
   while read -r line; do
     
     if [[ -z "$line" ]]; then
+      if [[ "$ref0" == "yes" ]]; then
         echo " [x] end of the svc spec"
-        print ""
-    
+        ref0="no"
+      fi
+        
     else
       if [[ "$line" == *"service instance"* ]]; then
         echo " [x] begin of the svc spec"
+        ref0="yes"
       else
         ref1=$(echo $line | cut -d '=' -f 1)
         ref2=$(echo $line | cut -d '=' -f 2)
@@ -61,9 +64,9 @@ function int_a() {
          
           echo " [+] svc id: ${ref2}"
           ;;
-         *)
-          echo " [-] unhandled val ${ref1}: ${ref2}"
-          ;;
+         #*)
+          #echo " [-] unhandled val ${ref1}: ${ref2}"
+          #;;
         esac
       fi      
     fi
