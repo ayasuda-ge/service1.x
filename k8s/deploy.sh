@@ -25,8 +25,9 @@
 function int_a() {
   
   echo " [+] install dep pkgs"
+  pip --version > /dev/null 2>&1 || apt-get -y install python3-pip
   pip list | grep -i pyyaml && pip install pyyaml
-  apt-get -y install git
+  git --version > /dev/null 2>&1 || apt-get -y install git
   
   #printf "{\"req\":%s,\"env\":%s,\"hello\":\"world\"}" "$1" "$2"
   #echo "$2" | jq -r '.CT_GHB_TKN'
@@ -45,8 +46,14 @@ function int_a() {
   
   while read -r line; do
     
-    if [[ ! -z "$line" ]]; then
-      if [[ "$line" != *"service instance"* ]]; then
+    if [[ -z "$line" ]]; then
+        echo " [x] end of the svc spec"
+        print ""
+    
+    else
+      if [[ "$line" == *"service instance"* ]]; then
+        echo " [x] begin of the svc spec"
+      else
         ref1=$(echo $line | cut -d '=' -f 1)
         ref2=$(echo $line | cut -d '=' -f 2)
         case $ref1 in
