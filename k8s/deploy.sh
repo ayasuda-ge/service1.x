@@ -68,7 +68,7 @@ function int_a() {
         #  break
         #fi
         
-        echo " [x] begin of the svc spec"
+        echo " [${x}] begin of the svc spec"
         ref0="yes"
       else
         ref1=$(echo $line | cut -d '=' -f 1)
@@ -124,6 +124,7 @@ function int_a() {
   git push origin master -f'
   
   echo " svc count: ${x}"
-  cd - && tree ./ && rm -Rf tmp
+  cd - && rm -Rf tmp
+  #cd - && tree ./ && rm -Rf tmp
   exit 0
 }
