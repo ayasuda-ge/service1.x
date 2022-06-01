@@ -64,9 +64,9 @@ function int_a() {
         
     else
       if [[ "$line" == *"service instance"* ]]; then
-        if (( "$x" == 10 )); then
-          break
-        fi
+        #if (( "$x" == 10 )); then
+        #  break
+        #fi
         
         echo " [x] begin of the svc spec"
         ref0="yes"
@@ -116,12 +116,14 @@ function int_a() {
     fi
   done < ~list
   
-  cd - && cd "$app_bas"
+  : 'cd - && cd "$app_bas"
   git add .
   git config user.name "ec.bot"
   git config user.email "ec.bot@ge.local"
   git commit -m 'update svc'
-  git push origin master -f
+  git push origin master -f'
+  
+  echo " svc count: ${x}"
   cd - && tree ./ && rm -Rf tmp
   exit 0
 }
