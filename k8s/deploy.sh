@@ -44,8 +44,9 @@ function int_a() {
   gbt=$(echo "$2" | jq -r '.CT_GHB_TKN')
   curl -Ss -o ~list "https://${gbt}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
   git clone "https://${gbt}@github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git"
-  app_dir="$(pwd)/ec-service-argo-cd-apps/apps/aws-dcc-prod-values.yaml"
-  svc_dir="$(pwd)/ec-service-argo-cd-apps/svc"
+  app_bas="$(pwd)/ec-service-argo-cd-apps"
+  app_dir="${app_bas}/apps/aws-dcc-prod-values.yaml"
+  svc_dir="${app_bas}/ec-service-argo-cd-apps/svc"
   
   while read -r line; do
     
@@ -103,6 +104,11 @@ function int_a() {
     fi
   done < ~list
   
-  tree ./ && cd - && rm -Rf tmp
+  cd - && cd "$app_bas"
+  git add .
+  git config user.name "ec.bot"
+  git config user.email "ec.bot@ge.local"
+  git commit -m 'update svc'
+  cd - && tree ./ && rm -Rf tmp
   exit 0
 }
