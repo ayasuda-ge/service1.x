@@ -70,6 +70,10 @@ function int_a() {
         ref2=$(echo $line | cut -d '=' -f 2)
         case $ref1 in
          ZONE)
+          if [[ "$ref2" == *"7fe6-413c-8330"* ]]; then
+            continue
+          fi 
+          
           mkdir -p "./${ref2}" \
           && cp ./dpl.yaml "./${ref2}/" \
           && cp ./svc.yaml "./${ref2}/" \
