@@ -65,13 +65,17 @@ function int_a() {
         ref2=$(echo $line | cut -d '=' -f 2)
         case $ref1 in
          ZONE)
-          mkdir -p "./${ref2}" && cp ./dpl.yaml "./${ref2}/"
+          mkdir -p "./${ref2}" && cp ./dpl.yaml "./${ref2}/" && cp ./svc.yaml "./${ref2}/" && cp ./igs.yaml "./${ref2}/"
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_ADM_TKN}}|${SVC_ADM_TKN}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_SETTING}}|${SVC_SETTING}|g" "./${ref2}/dpl.yaml"
           
+          sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/svc.yaml"
+          sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/igs.yaml"
+          
           #echo " [+] svc id: ${ref2}"
-          cat "./${ref2}/dpl.yaml"
+          cat "./${ref2}/dpl.yaml" "./${ref2}/svc.yaml" "./${ref2}/igs.yaml"
+          
           ;;
          ADMIN_TKN)
           SVC_ADM_TKN="$ref2"
