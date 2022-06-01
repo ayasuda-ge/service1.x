@@ -67,8 +67,17 @@ function int_a() {
          ZONE)
           mkdir -p "./${ref2}" && cp ./dpl.yaml "./${ref2}/"
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/dpl.yaml"
+          sed -i "s|{{SVC_ADM_TKN}}|${SVC_ADM_TKN}|g" "./${ref2}/dpl.yaml"
+          sed -i "s|{{SVC_SETTING}}|${SVC_SETTING}|g" "./${ref2}/dpl.yaml"
+          
           #echo " [+] svc id: ${ref2}"
           cat "./${ref2}/dpl.yaml"
+          ;;
+         ADMIN_TKN)
+          SVC_ADM_TKN="$ref2"
+          ;;
+         EC_SETTINGS)
+          SVC_SETTING="$ref2"
           ;;
          #*)
           #echo " [-] unhandled val ${ref1}: ${ref2}"
