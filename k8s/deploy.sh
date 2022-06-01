@@ -77,6 +77,7 @@ function int_a() {
           #echo " [+] svc id: ${ref2}"
           cat "./${ref2}/dpl.yaml" "./${ref2}/svc.yaml" "./${ref2}/igs.yaml"
           
+          [[ -d "${svc_dir}/${ref2}" ]] && rm -Rf "${svc_dir}/${ref2}"
           mv "./${ref2}" "${svc_dir}/${ref2}"
           ;;
          ADMIN_TKN)
