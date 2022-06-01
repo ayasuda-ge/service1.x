@@ -46,7 +46,7 @@ function int_a() {
   git clone "https://${gbt}@github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git"
   app_bas="$(pwd)/ec-service-argo-cd-apps"
   app_dir="${app_bas}/apps/aws-dcc-prod-values.yaml"
-  svc_dir="${app_bas}/ec-service-argo-cd-apps/svc"
+  svc_dir="${app_bas}/svc"
   
   while read -r line; do
     
