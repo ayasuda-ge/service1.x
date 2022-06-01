@@ -66,7 +66,7 @@ function int_a() {
         case $ref1 in
          ZONE)
           mkdir -p "./${ref2}" && cp ./dpl.yaml "./${ref2}/"
-          sed -i "" "s|{{SVC_ID}}|$ref2|g" "./${ref2}/dpl.yaml"
+          sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/dpl.yaml"
           #echo " [+] svc id: ${ref2}"
           cat "./${ref2}/dpl.yaml"
           ;;
