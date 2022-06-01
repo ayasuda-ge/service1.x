@@ -49,8 +49,11 @@ function int_a() {
     if [[ -z "$line" ]]; then
       if [[ "$ref0" == "yes" ]]; then
         echo " [x] end of the svc spec"
-        printf "\n\n"
+        printf "\n"
         ref0="no"
+        
+        #test
+        break
       fi
         
     else
@@ -62,8 +65,10 @@ function int_a() {
         ref2=$(echo $line | cut -d '=' -f 2)
         case $ref1 in
          ZONE)
-         
-          echo " [+] svc id: ${ref2}"
+          mkdir -p "./${ref2}" && cp ./dpl.yaml "./${ref2}/"
+          sed -i "" "s|{{SVC_ID}}|$ref2|g" "./${ref2}/dpl.yaml"
+          #echo " [+] svc id: ${ref2}"
+          cat "./${ref2}/dpl.yaml"
           ;;
          #*)
           #echo " [-] unhandled val ${ref1}: ${ref2}"
