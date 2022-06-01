@@ -43,6 +43,7 @@ function int_a() {
   gbt=$(echo "$2" | jq -r '.CT_GHB_TKN')
   curl -Ss -o ~list "https://${gbt}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
   git clone "https://${gbt}@github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git"
+  svc_dir="$(pwd)/ec-service-argo-cd-apps/svc"
   
   while read -r line; do
     
@@ -76,6 +77,7 @@ function int_a() {
           #echo " [+] svc id: ${ref2}"
           cat "./${ref2}/dpl.yaml" "./${ref2}/svc.yaml" "./${ref2}/igs.yaml"
           
+          mv "./${ref2}" "${svc_dir}/${ref2}"
           ;;
          ADMIN_TKN)
           SVC_ADM_TKN="$ref2"
