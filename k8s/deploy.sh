@@ -24,8 +24,13 @@
  
 function int_a() {
   
+  echo " [+] install dep pkgs"
+  pip list | grep -i pyyaml && pip install pyyaml
+  apt-get -y install git
+  
   #printf "{\"req\":%s,\"env\":%s,\"hello\":\"world\"}" "$1" "$2"
   #echo "$2" | jq -r '.CT_GHB_TKN'
+  echo " [+] acquiring scripts/assets"
   mkdir -p tmp && cd tmp
   wget -q -O ./dpl.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/dpl.yaml 
   wget -q -O ./svc.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc.yaml 
