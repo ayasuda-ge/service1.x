@@ -36,6 +36,7 @@ function int_a() {
   wget -q -O ./dpl.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/dpl.yaml 
   wget -q -O ./svc.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc.yaml 
   wget -q -O ./igs.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/igs.yaml
+  wget -q -O ./apps.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/apps.yaml
   
   #sid=$(echo "$1" | jq -r '.SVC_ID')  
   #sed -i "" "s|{{SVC_ID}}|$sid|g" dpl.yaml
@@ -43,6 +44,7 @@ function int_a() {
   gbt=$(echo "$2" | jq -r '.CT_GHB_TKN')
   curl -Ss -o ~list "https://${gbt}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
   git clone "https://${gbt}@github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git"
+  app_dir="$(pwd)/ec-service-argo-cd-apps/apps/aws-dcc-prod-values.yaml"
   svc_dir="$(pwd)/ec-service-argo-cd-apps/svc"
   
   while read -r line; do
@@ -66,16 +68,23 @@ function int_a() {
         ref2=$(echo $line | cut -d '=' -f 2)
         case $ref1 in
          ZONE)
-          mkdir -p "./${ref2}" && cp ./dpl.yaml "./${ref2}/" && cp ./svc.yaml "./${ref2}/" && cp ./igs.yaml "./${ref2}/"
+          mkdir -p "./${ref2}" \
+          && cp ./dpl.yaml "./${ref2}/" \
+          && cp ./svc.yaml "./${ref2}/" \
+          && cp ./igs.yaml "./${ref2}/" \
+          && cp ./apps.yaml "./~apps"
+          
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_ADM_TKN}}|${SVC_ADM_TKN}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_SETTING}}|${SVC_SETTING}|g" "./${ref2}/dpl.yaml"
           
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/svc.yaml"
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/igs.yaml"
+          sed -i "s|{{SVC_ID}}|${ref2}|g" "./~apps"
           
+          cat "./~apps" >> "$app_dir"
           #echo " [+] svc id: ${ref2}"
-          cat "./${ref2}/dpl.yaml" "./${ref2}/svc.yaml" "./${ref2}/igs.yaml"
+          cat "./${ref2}/dpl.yaml" "./${ref2}/svc.yaml" "./${ref2}/igs.yaml" "$app_dir"
           
           [[ -d "${svc_dir}/${ref2}" ]] && rm -Rf "${svc_dir}/${ref2}"
           mv "./${ref2}" "${svc_dir}/${ref2}"
