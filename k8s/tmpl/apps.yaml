@@ -1,0 +1,15 @@
+argocdNamespace: argocd
+
+valuesFilename: aws-dcc-prod-values.yaml
+
+# Default settings to remove some redundancy
+default:
+  app:
+    source:
+      extraSourceFields: |
+#          helm:
+#            valueFiles:
+#            - {{ $.Values.valuesFilename }}
+            
+ 
+apps:
