@@ -37,6 +37,7 @@ function int_a() {
   wget -q -O ./svc.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc.yaml 
   wget -q -O ./igs.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/igs.yaml
   wget -q -O ./apps.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/apps.yaml
+  wget -q -O ./svc-argocd-app.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc-argocd-app.yaml
   
   #sid=$(echo "$1" | jq -r '.SVC_ID')  
   #sed -i "" "s|{{SVC_ID}}|$sid|g" dpl.yaml
@@ -73,7 +74,9 @@ function int_a() {
           && cp ./dpl.yaml "./${ref2}/" \
           && cp ./svc.yaml "./${ref2}/" \
           && cp ./igs.yaml "./${ref2}/" \
-          && cp ./apps.yaml "./~apps"
+          && rm "$app_dir" \
+          && cp ./apps.yaml "$app_dir" \
+          && cp ./svc-argocd-app.yaml "./~apps"
           
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_ADM_TKN}}|${SVC_ADM_TKN}|g" "./${ref2}/dpl.yaml"
