@@ -26,3 +26,17 @@ apps:
       enabled: true
       prune: true
       selfHeal: true
+
+  svc-9e768876-7fe6-413c-8330-9e2d7ad42c7b:
+    source:
+      repoURL: https://github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git
+      path: svc/9e768876-7fe6-413c-8330-9e2d7ad42c7b
+      targetRevision: HEAD
+    destination:
+      namespace: ec-service
+      server: https://kubernetes.default.svc
+    project: ec-service
+    sync:
+      enabled: true
+      prune: true
+      selfHeal: true
