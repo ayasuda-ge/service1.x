@@ -25,9 +25,9 @@
 function int_a() {
   
   echo " [+] install dep pkgs"
-  pip --version > /dev/null 2>&1 || apt-get -y install python3-pip
-  pip list | grep -i pyyaml && pip install pyyaml
-  git --version > /dev/null 2>&1 || apt-get -y install git
+  pip --version > /dev/null 2>&1 && echo " [!] pkg pip exists" || apt-get -y install python3-pip
+  pip list | grep -i pyyaml && echo " [!] pkg pyyaml exists" || pip install pyyaml
+  git --version > /dev/null 2>&1 && echo " [!] pkg git exists" || apt-get -y install git
   
   #printf "{\"req\":%s,\"env\":%s,\"hello\":\"world\"}" "$1" "$2"
   #echo "$2" | jq -r '.CT_GHB_TKN'
@@ -49,6 +49,7 @@ function int_a() {
     if [[ -z "$line" ]]; then
       if [[ "$ref0" == "yes" ]]; then
         echo " [x] end of the svc spec"
+        printf "\n\n"
         ref0="no"
       fi
         
