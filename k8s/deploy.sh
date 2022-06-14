@@ -43,8 +43,13 @@ function int_a() {
   #sed -i "" "s|{{SVC_ID}}|$sid|g" dpl.yaml
   
   gbt=$(echo "$2" | jq -r '.CT_GHB_TKN')
-  curl -Ss -o ~list "https://${gbt}@github.build.ge.com/raw/Enterprise-Connect/backup-cf-service-content/main/cf-ec-service-env-content.txt"
-  git clone "https://${gbt}@github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git"
+  tmp_ar=$(echo "$2" | jq -r '.CT_ACD_REP')
+  tmp_sl=$(echo "$2" | jq -r '.CT_SVC_LST')
+  acd=$(echo -n "${tmp_ar/<%CT_GHB_TKN%>/$gbt}")
+  lst=$(echo -n "${tmp_sl/<%CT_GHB_TKN%>/$gbt}")
+  
+  curl -Ss -o ~list "$lst"
+  git clone "$acd"
   app_bas="$(pwd)/ec-service-argo-cd-apps"
   app_dir="${app_bas}/apps/aws-dcc-prod-values.yaml"
   svc_dir="${app_bas}/svc"
