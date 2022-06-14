@@ -1,4 +1,3 @@
-
 #!/bin/bash
 #
 #  Copyright (c) 2020 General Electric Company. All rights reserved.
