@@ -42,14 +42,15 @@ function int_a() {
   #sed -i "" "s|{{SVC_ID}}|$sid|g" dpl.yaml
   
   CT_GHB_TKN=$(echo "$2" | jq -r '.CT_GHB_TKN')
+  CT_ACD_PTH=$(echo "$2" | jq -r '.CT_ACD_PTH')
   tmp_ar=$(echo "$2" | jq -r '.CT_ACD_REP')
   tmp_sl=$(echo "$2" | jq -r '.CT_SVC_LST')
   CT_ACD_REP=$(echo -n "${tmp_ar/<%CT_GHB_TKN%>/$CT_GHB_TKN}")
   CT_SVC_LST=$(echo -n "${tmp_sl/<%CT_GHB_TKN%>/$CT_GHB_TKN}")
   curl -Ss -o ~list "$CT_SVC_LST"
-  git clone "$CT_ACD_REP"
-  app_bas="$(pwd)/ec-service-argo-cd-apps"
-  app_dir="${app_bas}/apps/aws-dcc-prod-values.yaml"
+  git clone "$CT_ACD_REP" psd
+  app_bas="$(pwd)/psd"
+  app_dir="${app_bas}/${CT_ACD_PTH}"
   svc_dir="${app_bas}/svc"
   
   x=1
