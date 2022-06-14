@@ -42,15 +42,13 @@ function int_a() {
   #sid=$(echo "$1" | jq -r '.SVC_ID')  
   #sed -i "" "s|{{SVC_ID}}|$sid|g" dpl.yaml
   
-  gbt=$(echo "$2" | jq -r '.CT_GHB_TKN')
+  CT_GHB_TKN=$(echo "$2" | jq -r '.CT_GHB_TKN')
   tmp_ar=$(echo "$2" | jq -r '.CT_ACD_REP')
   tmp_sl=$(echo "$2" | jq -r '.CT_SVC_LST')
-  acd=$(echo -n "${tmp_ar/<%CT_GHB_TKN%>/$gbt}")
-  lst=$(echo -n "${tmp_sl/<%CT_GHB_TKN%>/$gbt}")
-  echo "acd ${acd}"
-  echo "lst ${lst}"
-  curl -Ss -o ~list "$lst"
-  git clone "$acd"
+  CT_ACD_REP=$(echo -n "${tmp_ar/<%CT_GHB_TKN%>/$CT_GHB_TKN}")
+  CT_SVC_LST=$(echo -n "${tmp_sl/<%CT_GHB_TKN%>/$CT_GHB_TKN}")
+  curl -Ss -o ~list "$CT_SVC_LST"
+  git clone "$CT_ACD_REP"
   app_bas="$(pwd)/ec-service-argo-cd-apps"
   app_dir="${app_bas}/apps/aws-dcc-prod-values.yaml"
   svc_dir="${app_bas}/svc"
@@ -70,9 +68,9 @@ function int_a() {
         
     else
       if [[ "$line" == *"service instance"* ]]; then
-        #if (( "$x" == 10 )); then
-        #  break
-        #fi
+        if (( "$x" == 10 )); then
+          break
+        fi
         
         echo " [${x}] begin of the svc spec"
         ref0="yes"
