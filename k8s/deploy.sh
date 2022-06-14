@@ -47,7 +47,8 @@ function int_a() {
   tmp_sl=$(echo "$2" | jq -r '.CT_SVC_LST')
   acd=$(echo -n "${tmp_ar/<%CT_GHB_TKN%>/$gbt}")
   lst=$(echo -n "${tmp_sl/<%CT_GHB_TKN%>/$gbt}")
-  
+  echo "acd ${acd}"
+  echo "lst ${lst}"
   curl -Ss -o ~list "$lst"
   git clone "$acd"
   app_bas="$(pwd)/ec-service-argo-cd-apps"
