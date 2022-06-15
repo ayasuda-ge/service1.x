@@ -53,10 +53,6 @@ function int_a() {
   app_dir="${app_bas}/${CT_ACD_PTH}"
   svc_dir="${app_bas}/svc"
   
-  echo "~list:"
-  cat ~list
-  exit 0
-  
   x=1
   while read -r line; do
     
