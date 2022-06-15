@@ -68,9 +68,9 @@ function int_a() {
         
     else
       if [[ "$line" == *"service instance"* ]]; then
-        if (( "$x" == 10 )); then
-          break
-        fi
+        #if (( "$x" == 10 )); then
+        #  break
+        #fi
         
         echo " [${x}] begin of the svc spec"
         ref0="yes"
@@ -80,6 +80,9 @@ function int_a() {
         case $ref1 in
          ZONE)
           if [[ "$ref2" == *"b472-40b8-83e2"* ]] || [[ "$ref2" == *"8577-4685-bf3c"* ]] || [[ "$ref2" == *"c556-4d31-869f"* ]] || [[ "$ref2" == *"7fe6-413c-8330"* ]] || [[ "$ref2" == *"b317-4aaa-a92b"* ]] || [[ "$ref2" == *"a751-4cf3-9caf"* ]] || [[ "$ref2" == *"de07-48c7-a191"* ]]; then
+            echo ""
+            echo " [!] service ${ref2} discarded."
+            echo ""
             continue
           fi
           
