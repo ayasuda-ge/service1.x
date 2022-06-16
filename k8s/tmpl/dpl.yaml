@@ -60,11 +60,12 @@ spec:
               key: EC_CID
               optional: false
         - name: EC_CSC
-          valueFrom:
-            secretKeyRef:
-              name: ec-secrets
-              key: EC_CSC
-              optional: false
+          value: {{EC_CSC}}
+        #  valueFrom:
+        #    secretKeyRef:
+        #      name: ec-secrets
+        #      key: EC_CSC
+        #      optional: false
         ports:
           - containerPort: 7991
             name: sac-mst-port
@@ -113,11 +114,12 @@ spec:
                 key: EC_CID
                 optional: false
           - name: EC_CSC
-            valueFrom:
-              secretKeyRef:
-                name: ec-secrets
-                key: EC_CSC
-                optional: false
+            value: {{EC_CSC}}
+          #  valueFrom:
+          #    secretKeyRef:
+          #      name: ec-secrets
+          #      key: EC_CSC
+          #      optional: false
         ports:
           - containerPort: 7992
             name: sac-slv-port
@@ -179,11 +181,12 @@ spec:
                 key: EC_CID
                 optional: false
           - name: EC_CSC
-            valueFrom:
-              secretKeyRef:
-                name: ec-secrets
-                key: EC_CSC
-                optional: false
+            value: {{EC_CSC}}
+          #  valueFrom:
+          #    secretKeyRef:
+          #      name: ec-secrets
+          #      key: EC_CSC
+          #      optional: false
         ports:
           - containerPort: 7990
             name: http
