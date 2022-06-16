@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: {{SVC_ID}}-ec-prod-aws.digitalconnect.apps.ge.com
+  - host: {{SVC_FQDN}}
     http:
       paths:
       - path: /
