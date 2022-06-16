@@ -43,6 +43,7 @@ function int_a() {
   
   CT_GHB_TKN=$(echo "$2" | jq -r '.CT_GHB_TKN')
   CT_ACD_PTH=$(echo "$2" | jq -r '.CT_ACD_PTH')
+  EC_CSC=$(echo "$2" | jq -r '.EC_CSC')
   tmp_dn=$(echo "$2" | jq -r '.CT_FQDN')
   tmp_ar=$(echo "$2" | jq -r '.CT_ACD_REP')
   tmp_sl=$(echo "$2" | jq -r '.CT_SVC_LST')
@@ -101,6 +102,7 @@ function int_a() {
           CT_FQDN=$(echo -n "${tmp_dn/<%SVC_ID%>/$ref2}")
           
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/dpl.yaml"
+          sed -i "s|{{EC_CSC}}|${EC_CSC}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_ADM_TKN}}|${SVC_ADM_TKN}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_SETTING}}|${SVC_SETTING}|g" "./${ref2}/dpl.yaml"
           
