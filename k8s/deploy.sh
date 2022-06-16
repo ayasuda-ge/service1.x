@@ -112,11 +112,11 @@ function int_a() {
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./~apps"
           
           cat "./~apps" >> "$app_dir"
-          #cat "./${ref2}/dpl.yaml" "./${ref2}/svc.yaml" "./${ref2}/igs.yaml" "$app_dir"
+          
           echo ""
           echo " [!] service ${ref2} updated."
+          cat "./${ref2}/dpl.yaml" "./${ref2}/svc.yaml" "./${ref2}/igs.yaml" "$app_dir"
           echo ""
-          cat ./~apps ./${ref2}
             
           [[ -d "${svc_dir}/${ref2}" ]] && rm -Rf "${svc_dir}/${ref2}"
           mv "./${ref2}" "${svc_dir}/${ref2}"
