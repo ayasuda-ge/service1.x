@@ -43,6 +43,7 @@ function int_a() {
   
   CT_GHB_TKN=$(echo "$2" | jq -r '.CT_GHB_TKN')
   CT_ACD_PTH=$(echo "$2" | jq -r '.CT_ACD_PTH')
+  tmp_dn=$(echo "$2" | jq -r '.CT_FQDN')
   tmp_ar=$(echo "$2" | jq -r '.CT_ACD_REP')
   tmp_sl=$(echo "$2" | jq -r '.CT_SVC_LST')
   CT_ACD_REP=$(echo -n "${tmp_ar/<%CT_GHB_TKN%>/$CT_GHB_TKN}")
@@ -79,7 +80,8 @@ function int_a() {
         ref2=$(echo $line | cut -d '=' -f 2)
         case $ref1 in
          ZONE)
-          if [[ "$ref2" == *"b472-40b8-83e2"* ]] || [[ "$ref2" == *"8577-4685-bf3c"* ]] || [[ "$ref2" == *"c556-4d31-869f"* ]] || [[ "$ref2" == *"7fe6-413c-8330"* ]] || [[ "$ref2" == *"b317-4aaa-a92b"* ]] || [[ "$ref2" == *"a751-4cf3-9caf"* ]] || [[ "$ref2" == *"de07-48c7-a191"* ]]; then
+          #if [[ "$ref2" == *"b472-40b8-83e2"* ]] || [[ "$ref2" == *"8577-4685-bf3c"* ]] || [[ "$ref2" == *"c556-4d31-869f"* ]] || [[ "$ref2" == *"7fe6-413c-8330"* ]] || [[ "$ref2" == *"b317-4aaa-a92b"* ]] || [[ "$ref2" == *"a751-4cf3-9caf"* ]] || [[ "$ref2" == *"de07-48c7-a191"* ]]; then
+          if [[ "$ref2" != *"7fe6-413c-8330"* ]]; then
             echo ""
             echo " [!] service ${ref2} discarded."
             echo ""
@@ -96,12 +98,15 @@ function int_a() {
           && cp ./apps.yaml "$app_dir" \
           && cp ./svc-argocd-app.yaml "./~apps"
           
+          CT_FQDN=$(echo -n "${tmp_dn/<%SVC_ID%>/$ref2}")
+          
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_ADM_TKN}}|${SVC_ADM_TKN}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_SETTING}}|${SVC_SETTING}|g" "./${ref2}/dpl.yaml"
           
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/svc.yaml"
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/igs.yaml"
+          sed -i "s|{{SVC_FQDN}}|${CT_FQDN}|g" "./${ref2}/igs.yaml"
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./~apps"
           
           cat "./~apps" >> "$app_dir"
