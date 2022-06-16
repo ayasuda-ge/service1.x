@@ -113,7 +113,11 @@ function int_a() {
           
           cat "./~apps" >> "$app_dir"
           #cat "./${ref2}/dpl.yaml" "./${ref2}/svc.yaml" "./${ref2}/igs.yaml" "$app_dir"
-          
+          echo ""
+          echo " [!] service ${ref2} updated."
+          echo ""
+          cat ./~apps ./${ref2}
+            
           [[ -d "${svc_dir}/${ref2}" ]] && rm -Rf "${svc_dir}/${ref2}"
           mv "./${ref2}" "${svc_dir}/${ref2}"
           x=$(( $x + 1 ))
