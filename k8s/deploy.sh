@@ -43,7 +43,7 @@ function int_a() {
   EC_CID=$(echo "$2" | jq -r '.EC_CID')
   EC_CSC=$(echo "$2" | jq -r '.EC_CSC')
   EC_NOD=$(echo "$2" | jq -r '.EC_NOD')
-  TMP_TKN=$(echo "$2" | jq -r '.TMP_TKN')
+  #TMP_TKN=$(echo "$2" | jq -r '.TMP_TKN')
   
   #OWNER_INF=$(curl -X GET "$EC_NOD" -H "accept: application/json" -H "Authorization: Bearer ${TMP_TKN}")
   
@@ -145,15 +145,15 @@ function int_a() {
     fi
   done < ~list
   
-  : 'cd - && cd "$app_bas"
+  cd - && cd "$app_bas"
   git add .
   git config user.name "ec.bot"
   git config user.email "ec.bot@ge.local"
   git commit -m 'update svc'
-  git push origin master -f'
+  git push origin master -f
   
   echo " svc count: ${x}"
-  cd - && rm -Rf tmp
-  #cd - && tree ./ && rm -Rf tmp
+  #rm -Rf tmp
+  cd - && tree ./ && rm -Rf tmp
   exit 0
 }
