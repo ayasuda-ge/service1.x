@@ -24,6 +24,9 @@ spec:
           - name: svc-mount
             mountPath: "/root/.ec/sac-mstr/license"
             subPath: "prod/sac/master/sac-mstr/license"    
+          - name: svc-mount
+            mountPath: /root/.hash
+            subPath: "./.hash"
         image: ghcr.io/ec-release/sac:master-eks
         resources:
           requests:
@@ -59,13 +62,6 @@ spec:
               name: ec-secrets
               key: EC_CID
               optional: false
-        - name: EC_CSC
-          value: {{EC_CSC}}
-        #  valueFrom:
-        #    secretKeyRef:
-        #      name: ec-secrets
-        #      key: EC_CSC
-        #      optional: false
         ports:
           - containerPort: 7991
             name: sac-mst-port
@@ -76,6 +72,9 @@ spec:
           - name: svc-mount
             mountPath: "/root/.ec/.db"
             subPath: "prod/sac/slave/{{SVC_ID}}/.db"
+          - name: svc-mount
+            mountPath: /root/.hash
+            subPath: "./.hash"
         image: ghcr.io/ec-release/sac:slave-eks
         resources:
           requests:
@@ -113,13 +112,6 @@ spec:
                 name: ec-secrets
                 key: EC_CID
                 optional: false
-          - name: EC_CSC
-            value: {{EC_CSC}}
-          #  valueFrom:
-          #    secretKeyRef:
-          #      name: ec-secrets
-          #      key: EC_CSC
-          #      optional: false
         ports:
           - containerPort: 7992
             name: sac-slv-port
@@ -130,6 +122,9 @@ spec:
           - name: svc-mount
             mountPath: /root/svcs
             subPath: prod/svcs/{{SVC_ID}}
+          - name: svc-mount
+            mountPath: /root/.hash
+            subPath: "./.hash"
         resources:
           requests:
             memory: "256Mi"
@@ -180,13 +175,6 @@ spec:
                 name: ec-secrets
                 key: EC_CID
                 optional: false
-          - name: EC_CSC
-            value: {{EC_CSC}}
-          #  valueFrom:
-          #    secretKeyRef:
-          #      name: ec-secrets
-          #      key: EC_CSC
-          #      optional: false
         ports:
           - containerPort: 7990
             name: http
