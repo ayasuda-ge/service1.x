@@ -43,6 +43,7 @@ function int_a() {
   EC_CID=$(echo "$2" | jq -r '.EC_CID')
   EC_CSC=$(echo "$2" | jq -r '.EC_CSC')
   EC_NOD=$(echo "$2" | jq -r '.EC_NOD')
+  TMP_TKN=$(echo "$2" | jq -r '.TMP_TKN')
   
   curl -X GET "$EC_NOD" -H "accept: application/json" -H "Authorization: Bearer ${TMP_TKN}"
   
