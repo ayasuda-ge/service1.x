@@ -152,7 +152,7 @@ function int_a() {
   git commit -m 'update svc'
   git push origin master -f'
   
-  curl -X PUT "https://${EC_NOD}" -H "accept: application/json" -H "Authorization: Bearer ${TMP_TKN}" -H "Content-Type: application/json" -d "$OWNER_INF"
+  curl -X PUT "${EC_NOD}" -H "accept: application/json" -H "Authorization: Bearer ${TMP_TKN}" -H "Content-Type: application/json" -d "$OWNER_INF"
   
   echo " svc count: ${x}"
   cd - && rm -Rf tmp
