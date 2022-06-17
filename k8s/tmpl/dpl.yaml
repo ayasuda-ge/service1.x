@@ -51,11 +51,11 @@ spec:
         - name: SAC_TYPE
           value: master
         - name: SAC_URL
-          value: http://localhost:7991
+          value: http://svc-{{SVC_ID}}.ec-service.svc.cluster.local:7991
         - name: EC_PORT
           value: :7991
         - name: EC_NOD
-          value: http://localhost:7991
+          value: {{EC_NOD}}:7991
         - name: EC_CID
           valueFrom:
             secretKeyRef:
@@ -101,9 +101,9 @@ spec:
           - name: SAC_TYPE
             value: slave
           - name: SAC_URL
-            value: http://localhost:7992
+            value: http://svc-{{SVC_ID}}.ec-service.svc.cluster.local:7992
           - name: EC_NOD
-            value: http://localhost:7992
+            value: {{EC_NOD}}   
           - name: EC_PORT
             value: :7992
           - name: EC_CID
@@ -152,7 +152,7 @@ spec:
           - name: EC_SAC_SLAV_URL
             value: http://localhost:7992
           - name: EC_SVC_URL
-            value: https://{{SVC_ID}}-ec-prod-aws.digitalconnect.apps.ge.com
+            value: http://svc-{{SVC_ID}}.ec-service.svc.cluster.local
           - name: ADMIN_USR
             value: admin
           - name: ADMIN_TKN
