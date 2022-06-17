@@ -103,7 +103,7 @@ spec:
           - name: SAC_URL
             value: http://svc-{{SVC_ID}}.ec-service.svc.cluster.local:7992
           - name: EC_NOD
-            value: {{EC_NOD}}   
+            value: {{EC_NOD}}:7992
           - name: EC_PORT
             value: :7992
           - name: EC_CID
