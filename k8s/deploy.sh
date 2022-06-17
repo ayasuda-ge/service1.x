@@ -114,6 +114,7 @@ function int_a() {
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_ADM_TKN}}|${SVC_ADM_TKN}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_SETTING}}|${SVC_SETTING}|g" "./${ref2}/dpl.yaml"
+          sed -i "s|{{EC_NOD}}|${EC_NOD}|g" "./${ref2}/dpl.yaml"
           
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/svc.yaml"
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/igs.yaml"
