@@ -47,7 +47,7 @@ function int_a() {
   
   OWNER_INF=$(curl -X GET "$EC_NOD" -H "accept: application/json" -H "Authorization: Bearer ${TMP_TKN}")
   
-  
+  echo "OWNER_INF: $OWNER_INF"
   CT_GHB_TKN=$(echo "$2" | jq -r '.CT_GHB_TKN')
   CT_ACD_PTH=$(echo "$2" | jq -r '.CT_ACD_PTH')
 
