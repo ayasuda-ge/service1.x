@@ -45,9 +45,9 @@ function int_a() {
   EC_NOD=$(echo "$2" | jq -r '.EC_NOD')
   TMP_TKN=$(echo "$2" | jq -r '.TMP_TKN')
   
-  OWNER_INF=$(curl -X GET "$EC_NOD" -H "accept: application/json" -H "Authorization: Bearer ${TMP_TKN}")
+  #OWNER_INF=$(curl -X GET "$EC_NOD" -H "accept: application/json" -H "Authorization: Bearer ${TMP_TKN}")
   
-  echo "OWNER_INF: $OWNER_INF"
+  #echo "OWNER_INF: $OWNER_INF"
   CT_GHB_TKN=$(echo "$2" | jq -r '.CT_GHB_TKN')
   CT_ACD_PTH=$(echo "$2" | jq -r '.CT_ACD_PTH')
 
@@ -108,7 +108,7 @@ function int_a() {
           && cp ./svc-argocd-app.yaml "./~apps"
           
           CT_FQDN=$(echo -n "${tmp_dn/<%SVC_ID%>/$ref2}")
-          CT_FQDN_SVC=$(echo -n "${tmp_dn_svc/<%SVC_ID%>/$ref2}")
+          #CT_FQDN_SVC=$(echo -n "${tmp_dn_svc/<%SVC_ID%>/$ref2}")
           
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_ADM_TKN}}|${SVC_ADM_TKN}|g" "./${ref2}/dpl.yaml"
@@ -120,7 +120,7 @@ function int_a() {
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./~apps"
           
           cat "./~apps" >> "$app_dir"
-          OWNER_INF=$(echo "$OWNER_INF" | jq '.SVC_LIST += {"'$ref2'":["https://'$CT_FQDN'","http://'$CT_FQDN_SVC'"]}')
+          #OWNER_INF=$(echo "$OWNER_INF" | jq '.SVC_LIST += {"'$ref2'":["https://'$CT_FQDN'","http://'$CT_FQDN_SVC'"]}')
           #'. += {"456f":["123"]}'
           #echo ""
           echo " [!] service ${ref2} updated."
@@ -151,8 +151,6 @@ function int_a() {
   git config user.email "ec.bot@ge.local"
   git commit -m 'update svc'
   git push origin master -f'
-  
-  curl -X PUT "${EC_NOD}" -H "accept: application/json" -H "Authorization: Bearer ${TMP_TKN}" -H "Content-Type: application/json" -d "$OWNER_INF"
   
   echo " svc count: ${x}"
   cd - && rm -Rf tmp
