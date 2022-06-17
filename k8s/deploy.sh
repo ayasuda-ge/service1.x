@@ -63,6 +63,9 @@ function int_a() {
   app_dir="${app_bas}/${CT_ACD_PTH}"
   svc_dir="${app_bas}/svc"
   
+  rm "$app_dir" \
+  && cp ./apps.yaml "$app_dir"
+        
   x=1
   while read -r line; do
     
@@ -81,7 +84,7 @@ function int_a() {
         #if (( "$x" == 10 )); then
         #  break
         #fi
-        
+          
         echo " [${x}] begin of the svc spec"
         ref0="yes"
       else
@@ -103,8 +106,6 @@ function int_a() {
           && cp ./dpl.yaml "./${ref2}/" \
           && cp ./svc.yaml "./${ref2}/" \
           && cp ./igs.yaml "./${ref2}/" \
-          && rm "$app_dir" \
-          && cp ./apps.yaml "$app_dir" \
           && cp ./svc-argocd-app.yaml "./~apps"
           
           CT_FQDN=$(echo -n "${tmp_dn/<%SVC_ID%>/$ref2}")
@@ -154,6 +155,6 @@ function int_a() {
   
   echo " svc count: ${x}"
   #rm -Rf tmp
-  cd - && tree ./ && rm -Rf tmp
+  cd - && rm -Rf tmp
   exit 0
 }
