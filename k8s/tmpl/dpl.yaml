@@ -44,7 +44,7 @@ spec:
         readinessProbe:
           tcpSocket:
             port: 7991
-          initialDelaySeconds: 98
+          initialDelaySeconds: 99
           failureThreshold: 10
           periodSeconds: 10
         env:
@@ -92,7 +92,7 @@ spec:
         readinessProbe:
           tcpSocket:
             port: 7992
-          initialDelaySeconds: 100
+          initialDelaySeconds: 99
           failureThreshold: 10
           periodSeconds: 10
         env:
@@ -138,7 +138,7 @@ spec:
             port: http
           failureThreshold: 10
           periodSeconds: 90
-          initialDelaySeconds: 100
+          initialDelaySeconds: 99
         readinessProbe:
           httpGet:
             path: /v1/info/
