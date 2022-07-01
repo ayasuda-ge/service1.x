@@ -1,0 +1,81 @@
+---
+# begin ec autobot
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dpl-{{SVC_ID}}
+spec:
+  selector:
+    matchLabels:
+      run: dpl-{{SVC_ID}}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: dpl-{{SVC_ID}}
+    spec:
+      volumes:
+        - name: svc-mount
+          persistentVolumeClaim:
+            claimName: ec-svc-efs-pvc
+      containers:
+      - name: svc
+        image: ghcr.io/ec-release/svc:1.1-eks
+        volumeMounts:
+          - name: svc-mount
+            mountPath: /root/svcs
+            subPath: prod/svcs/{{SVC_ID}}          
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:	
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /v1/info/
+            port: http
+          failureThreshold: 10
+          periodSeconds: 90
+          initialDelaySeconds: 99
+        readinessProbe:
+          httpGet:
+            path: /v1/info/
+            port: http
+          initialDelaySeconds: 99
+          failureThreshold: 10
+          periodSeconds: 11
+        env:
+          - name: EC_SAC_MSTR_URL
+            value: http://localhost:7991
+          - name: EC_SAC_SLAV_URL
+            value: http://localhost:7992
+          - name: EC_SVC_URL
+            value: http://svc-{{SVC_ID}}.ec-service.svc.cluster.local
+          - name: ADMIN_USR
+            value: admin
+          - name: ADMIN_TKN
+            value: {{SVC_ADM_TKN}}
+          - name: EC_SETTING
+            value: {{SVC_SETTING}}
+          - name: EC_SVC_ID
+            value: {{SVC_ID}}
+          - name: EC_PORT
+            value: :7990
+          - name: EC_PRVT_PWD
+            valueFrom:
+              secretKeyRef:
+                name: ec-secrets
+                key: EC_PVT_PWD
+                optional: false
+          - name: EC_CID
+            valueFrom:
+              secretKeyRef:
+                name: ec-secrets
+                key: EC_CID
+                optional: false
+        ports:
+          - containerPort: 7990
+            name: http
+            protocol: TCP
