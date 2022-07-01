@@ -32,8 +32,8 @@ function int_a() {
   #echo "$2" | jq -r '.CT_GHB_TKN'
   echo " [+] acquiring scripts/assets"
   mkdir -p tmp && cd tmp
-  wget -q -O ./dpl.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/dpl.yaml 
-  wget -q -O ./svc.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc.yaml 
+  wget -q -O ./dpl.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/dpl_red.yaml 
+  wget -q -O ./svc.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc_red.yaml 
   wget -q -O ./igs.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/igs.yaml
   wget -q -O ./apps.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/apps.yaml
   wget -q -O ./svc-argocd-app.yaml https://raw.githubusercontent.com/ayasuda-ge/service1.x/1.1/k8s/tmpl/svc-argocd-app.yaml
@@ -92,6 +92,8 @@ function int_a() {
         ref2=$(echo $line | cut -d '=' -f 2)
         case $ref1 in
          ZONE)
+         
+          #pre-deploy service instances 
           if [[ "$ref2" == *"b472-40b8-83e2"* ]] || [[ "$ref2" == *"8577-4685-bf3c"* ]] || [[ "$ref2" == *"c556-4d31-869f"* ]] || [[ "$ref2" == *"7fe6-413c-8330"* ]] || [[ "$ref2" == *"b317-4aaa-a92b"* ]] || [[ "$ref2" == *"a751-4cf3-9caf"* ]] || [[ "$ref2" == *"de07-48c7-a191"* ]]; then
           #if [[ "$ref2" != *"7fe6-413c-8330"* ]]; then
             echo ""
