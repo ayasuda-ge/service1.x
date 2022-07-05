@@ -10,7 +10,7 @@ process.on('uncaughtException', function(err) {
 var ECService=require('./ec-service');
 
 var phs=new ECService({
-    localPort:process.env.RFD_PRT || 8989,
+    localPort:process.env.RFD_PRT || 7990,
     info: {
 	    id: process.env.EC_SVC_ID,
 	    url: process.env.EC_SVC_URL,
