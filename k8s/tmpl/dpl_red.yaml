@@ -55,7 +55,7 @@ spec:
           - name: EC_SAC_SLAV_URL
             value: http://localhost:7992
           - name: EC_SVC_URL
-            value: http://svc-{{SVC_ID}}.ec-service.svc.cluster.local
+            value: https://{{SVC_ID}}-ec-prod-aws.digitalconnect.apps.ge.com
           - name: ADMIN_USR
             value: admin
           - name: ADMIN_TKN
