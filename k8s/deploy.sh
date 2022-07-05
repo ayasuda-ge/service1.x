@@ -50,6 +50,8 @@ function int_a() {
   #echo "OWNER_INF: $OWNER_INF"
   CT_GHB_TKN=$(echo "$2" | jq -r '.CT_GHB_TKN')
   CT_ACD_PTH=$(echo "$2" | jq -r '.CT_ACD_PTH')
+  BUILD_ID=$(echo "$2" | jq -r '.BUILD_ID')
+ 
 
   tmp_dn=$(echo "$2" | jq -r '.CT_FQDN')
   tmp_dn_svc=$(echo "$2" | jq -r '.CT_FQDN_SVC')
@@ -122,6 +124,7 @@ function int_a() {
           sed -i "s|{{SVC_ADM_TKN}}|${SVC_ADM_TKN}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{SVC_SETTING}}|${SVC_SETTING}|g" "./${ref2}/dpl.yaml"
           sed -i "s|{{EC_NOD}}|${EC_NOD}|g" "./${ref2}/dpl.yaml"
+          sed -i "s|{{BUILD_ID}}|${BUILD_ID}|g" "./${ref2}/dpl.yaml"
           
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/svc.yaml"
           sed -i "s|{{SVC_ID}}|${ref2}|g" "./${ref2}/igs.yaml"
