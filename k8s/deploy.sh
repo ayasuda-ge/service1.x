@@ -155,11 +155,11 @@ function int_a() {
   done < ~list
   
   cd - && cd "$app_bas"
-  git add .
+  : 'git add .
   git config user.name "ec.bot"
   git config user.email "ec.bot@ge.local"
   git commit -m 'update svc'
-  git push origin master -f
+  git push origin master -f'
   
   echo " svc count: ${x}"
   #rm -Rf tmp
