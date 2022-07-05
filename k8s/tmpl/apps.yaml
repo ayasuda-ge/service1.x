@@ -39,68 +39,12 @@ apps:
     sync:
       enabled: true
       prune: true
-      selfHeal: true
-      
-  svc-49af1df5-a751-4cf3-9caf-d9da2c9aff5a:
-    source:
-      repoURL: https://github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git
-      path: svc/49af1df5-a751-4cf3-9caf-d9da2c9aff5a
-      targetRevision: HEAD
-    destination:
-      namespace: ec-service
-      server: https://kubernetes.default.svc
-    project: ec-service
-    sync:
-      enabled: true
-      prune: true
-      selfHeal: true
+      selfHeal: true      
 
   svc-888d91ee-c556-4d31-869f-c6e937bfa7af:
     source:
       repoURL: https://github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git
       path: svc/888d91ee-c556-4d31-869f-c6e937bfa7af
-      targetRevision: HEAD
-    destination:
-      namespace: ec-service
-      server: https://kubernetes.default.svc
-    project: ec-service
-    sync:
-      enabled: true
-      prune: true
-      selfHeal: true
-
-  svc-3dc7ad45-b317-4aaa-a92b-685d007937ae:
-    source:
-      repoURL: https://github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git
-      path: svc/3dc7ad45-b317-4aaa-a92b-685d007937ae
-      targetRevision: HEAD
-    destination:
-      namespace: ec-service
-      server: https://kubernetes.default.svc
-    project: ec-service
-    sync:
-      enabled: true
-      prune: true
-      selfHeal: true
-
-  svc-51cc975b-de07-48c7-a191-98b187f0793e:
-    source:
-      repoURL: https://github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git
-      path: svc/51cc975b-de07-48c7-a191-98b187f0793e
-      targetRevision: HEAD
-    destination:
-      namespace: ec-service
-      server: https://kubernetes.default.svc
-    project: ec-service
-    sync:
-      enabled: true
-      prune: true
-      selfHeal: true
-
-  svc-ac2f0b79-b472-40b8-83e2-b34a19b615bf:
-    source:
-      repoURL: https://github.build.ge.com/digital-connect-devops/ec-service-argo-cd-apps.git
-      path: svc/ac2f0b79-b472-40b8-83e2-b34a19b615bf
       targetRevision: HEAD
     destination:
       namespace: ec-service
