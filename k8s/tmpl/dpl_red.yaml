@@ -67,7 +67,7 @@ spec:
           - name: EC_PORT
             value: :7990
           - name: BUILD_ID
-            value: {{BUILD_ID}}
+            value: "{{BUILD_ID}}"
           - name: EC_PRVT_PWD
             valueFrom:
               secretKeyRef:
