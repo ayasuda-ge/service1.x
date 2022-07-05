@@ -24,7 +24,10 @@ spec:
         volumeMounts:
           - name: svc-mount
             mountPath: /root/svcs
-            subPath: prod/svcs/{{SVC_ID}}          
+            subPath: prod/svcs/{{SVC_ID}}
+          - name: svc-mount
+            mountPath: /root/svcs-keypair
+            subPath: prod/svcs-keypair        
         resources:
           requests:
             memory: "256Mi"
